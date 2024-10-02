@@ -6,3 +6,5 @@ Oct 2nd 2024 12:46
 - Fraud Detection: Set up the fraud-detection/ module to monitor transactions and flag suspicious activity.
 
 
+Oct 2nd 2024 13:04
+To finish accnt folder setup.
