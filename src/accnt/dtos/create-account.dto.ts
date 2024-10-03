@@ -1,5 +1,15 @@
+import { IsNotEmpty, IsNumber, IsString, IsUUID, Min } from 'class-validator';
+
 export class CreateAccountDto {
-    readonly accountNumber: string;
-    readonly ownerId: string;
-    readonly initialDeposit: number;
+  @IsString()
+  @IsNotEmpty()
+  readonly accountNumber: string;
+
+  @IsUUID()
+  @IsNotEmpty()
+  readonly ownerId: string;
+
+  @IsNumber()
+  @Min(0)
+  readonly initialDeposit: number;
 }
