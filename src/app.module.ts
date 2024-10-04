@@ -22,3 +22,26 @@ import { AuthModule } from './auth/auth.module';
   ],
 })
 export class AppModule { }
+
+
+/* 
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+
+@Module({
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        url: configService.get('DATABASE_URL'),
+        autoLoadEntities: true,
+        synchronize: true,
+      }),
+    }),
+  ],
+})
+export class AppModule {}
+*/

@@ -339,3 +339,12 @@ digital-bank-system/
 ├── package.json                      # NPM dependencies and scripts
 ├── tsconfig.json                     # TypeScript configuration
 └── README.md                         # Project documentation
+
+
+Oct 4th 2024 14:11
+<!-- TODO : To implement the 'core modules'. -->
+- Create the 'User Module' (User Management) — define entities, services, controllers, and DTOs.
+- Set Up 'Authentication' — implement JWT, login, register, and route protection.
+- Establish the 'Account Module' — manage user accounts.
+- Configure 'Database Migrations' and 'Seeding' — ensure database consistency and prepopulate data.
+
