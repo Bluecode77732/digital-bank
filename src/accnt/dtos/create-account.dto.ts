@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString, IsUUID, Min } from 'class-validator';
+import { IsNotEmpty, IsNumber, isString, IsString, IsUUID, Min } from 'class-validator';
 
 export class CreateAccountDto {
   @IsString()
@@ -12,4 +12,7 @@ export class CreateAccountDto {
   @IsNumber()
   @Min(0)
   readonly initialDeposit: number;
+
+  @IsString()
+  readonly accountType: string;
 }

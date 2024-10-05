@@ -348,3 +348,16 @@ Oct 4th 2024 14:11
 - Establish the 'Account Module' — manage user accounts.
 - Configure 'Database Migrations' and 'Seeding' — ensure database consistency and prepopulate data.
 
+
+Oct 5th 2024 22:11
+<!-- TODO : (By ChatGPT 4o - Creating Digital Bank Transactions)Next Steps: -->
+- 'User Module Setup': The Account entity references a User, so make sure you have a basic *user.entity.ts* and *user.service.ts* ready. If you need help with that, let me know.
+
+- Database Setup: Ensure PostgreSQL is running and update your app.module.ts to use your PostgreSQL credentials.
+
+- 'User Module Setup':
+Since the Account entity relies on the User, you’ll need to have a basic *user entity* and *service* ready. You can create a simple *UserModule* with *user.entity.ts* and *user.service.ts*. 
+
+The 'User Module Setup' need to be setup for linking 'accnt' together for accessibility over of controller and user.
+
+

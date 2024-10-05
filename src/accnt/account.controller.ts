@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Put, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
 import { AccountService } from './account.service';
-import { CreateAccountDto, UpdateAccountDto } from './dto';
+import { CreateAccountDto } from './dtos/create-account.dto';
+import { UpdateAccountDto } from './dtos/update-account.dto';
 
-@Controller('accounts')
+@Controller('account')
 export class AccountController {
     constructor(private readonly accountService: AccountService) { }
 
@@ -11,13 +12,23 @@ export class AccountController {
         return this.accountService.create(createAccountDto);
     }
 
+    @Get()
+    findAll() {
+        return this.accountService.findAll();
+    }
+
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.accountService.findOne(id);
     }
 
-    @Put(':id')
+    @Patch(':id')
     update(@Param('id') id: string, @Body() updateAccountDto: UpdateAccountDto) {
         return this.accountService.update(id, updateAccountDto);
+    }
+
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return this.accountService.remove(id);
     }
 }
