@@ -361,3 +361,6 @@ Since the Account entity relies on the User, you’ll need to have a basic *user
 The 'User Module Setup' need to be setup for linking 'accnt' together for accessibility over of controller and user.
 
 
+Oct 7th 2024 22:01
+Just commited in 'app.accnt.spec.ts' file.
+<!-- todo --> It's time to set 'User' entity.
