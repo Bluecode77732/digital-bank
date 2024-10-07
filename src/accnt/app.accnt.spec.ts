@@ -24,7 +24,16 @@ describe('AccountService', () => {
     });
 
     it('should create an account', async () => {
-        const accountData = { userId: '1', initialBalance: 100, accountType: 'savings' };
+        const accountData = { 
+            /* userId: '1', 
+            initialBalance: 100, 
+            accountType: 'savings'  */
+            id: '1',
+            accountNumber: "1",
+            balance: 100,
+            owner: '',
+            createdAt: Date,
+        };
         jest.spyOn(repo, 'create').mockReturnValue(accountData);
         jest.spyOn(repo, 'save').mockResolvedValue(accountData);
 
