@@ -4,8 +4,41 @@ import { Repository } from 'typeorm';
 import { Account } from './account.entity';
 import { CreateAccountDto } from './dtos/create-account.dto';
 import { UpdateAccountDto } from './dtos/update-account.dto';
-import { UserService } from '../user/user.service';
+// import { UserService } from '../user/user.service';
 
+@Injectable()
+export class AccountService {
+    constructor(
+        @InjectRepository(Account)
+        private readonly accountRepository: Repository<Account>,
+    ) { }
+
+    async create(createAccountDto: CreateAccountDto) {
+        const account = this.accountRepository.create(createAccountDto as Partial<Account>); // Ensure it's treated as a partial
+        return await this.accountRepository.save(account); // Save to DB
+    }
+
+    findAll() {
+        return this.accountRepository.find();
+    }
+
+    findOne(id: string) {
+        return this.accountRepository.findOneBy({ id });
+    }
+
+    async update(id: string, updateAccountDto: UpdateAccountDto) {
+        await this.accountRepository.update(id, updateAccountDto as Partial<Account>);
+        return this.findOne(id);
+    }
+
+    async remove(id: string) {
+        await this.accountRepository.delete(id);
+        return { deleted: true };
+    }
+}
+
+
+/* 
 @Injectable()
 export class AccountService {
     constructor(
@@ -44,7 +77,7 @@ export class AccountService {
         return this.accountRepository.save(account);
     }
 }
-
+ */
 
 /* 
 export class AccountService {
