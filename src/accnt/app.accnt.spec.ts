@@ -3,6 +3,8 @@ import { AccountService } from './account.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Account } from './account.entity';
 import { Repository } from 'typeorm';
+import { CreateAccountDto } from './dtos/create-account.dto';
+// import { crea } from './dto/create-account.dto'; // Make sure to import this
 
 describe('AccountService', () => {
     let service: AccountService;
@@ -24,21 +26,28 @@ describe('AccountService', () => {
     });
 
     it('should create an account', async () => {
-        const accountData = {
-            /* userId: '1', 
-            initialBalance: 100, 
-            accountType: 'savings'  */
-            id: '1',
-            accountNumber: "1",
-            balance: 100,
-            owner: '',
-            createdAt: Date,
+        const createAccountDto: CreateAccountDto = {
+            accountNumber: '1234567890',
+            ownerId: '1',
+            initialDeposit: 100,
+            accountType: "",
+            // Add any other required properties from CreateAccountDto
         };
-        jest.spyOn(repo, 'create').mockReturnValue(accountData);
-        jest.spyOn(repo, 'save').mockResolvedValue(accountData);
 
-        const result = await service.create(accountData);
-        expect(result).toEqual(accountData);
+        const createdAccount: Account = {
+            id: '1',
+            accountNumber: createAccountDto.accountNumber,
+            balance: createAccountDto.initialDeposit,
+            owner: createAccountDto.ownerId,
+            createdAt: new Date(),
+            // Add any other required properties from the Account entity
+        };
+
+        jest.spyOn(repo, 'create').mockReturnValue(createdAccount);
+        jest.spyOn(repo, 'save').mockResolvedValue(createdAccount);
+
+        const result = await service.create(createAccountDto);
+        expect(result).toEqual(createdAccount);
     });
 
     // Additional tests for update, findAll, findOne, remove...
@@ -49,8 +58,9 @@ describe('AccountService', () => {
 import { AccountService } from './account.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Account } from './account.entity';
-import { Repository } from 'typeorm'; */
-
+import { Repository } from 'typeorm';
+import { CreateAccountDto } from './dto/create-account.dto';
+ */
 describe('AccountService', () => {
     let service: AccountService;
     let repo: Repository<Account>;
@@ -71,14 +81,28 @@ describe('AccountService', () => {
     });
 
     it('should create an account', async () => {
-        const accountData = { 
-            userId: '1', initialBalance: 100, accountType: 'savings' 
+        const createAccountDto: CreateAccountDto = {
+            accountNumber: '1234567890',
+            ownerId: '1',
+            initialDeposit: 100,
+            accountType: 'savings', // Added accountType
+            // Add any other required properties from CreateAccountDto
         };
-        const createdAccount = { id: '123', ...accountData } as Account; // Mock Account entity with ID
+
+        const createdAccount: Account = {
+            id: '1',
+            accountNumber: createAccountDto.accountNumber,
+            balance: createAccountDto.initialDeposit,
+            owner: createAccountDto.ownerId,
+            // accountType: createAccountDto.accountType, // Added accountType
+            createdAt: new Date(),
+            // Add any other required properties from the Account entity
+        };
+
         jest.spyOn(repo, 'create').mockReturnValue(createdAccount);
         jest.spyOn(repo, 'save').mockResolvedValue(createdAccount);
 
-        const result = await service.create(accountData);
+        const result = await service.create(createAccountDto);
         expect(result).toEqual(createdAccount);
     });
 

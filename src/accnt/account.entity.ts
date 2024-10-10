@@ -17,4 +17,11 @@ export class Account {
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
+
+    @Column()
+    accountType: string;
+
+    // Each account is tied to one user
+    @ManyToOne(() => User, user => user.accounts)
+    user: User;  // Reference the user entity
 }
