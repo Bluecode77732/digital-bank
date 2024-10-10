@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-// import { AccountModule } from './account/account.module';
-// import { UserModule } from '../user/..module';
-// import { AuthModule } from './auth/auth.module';
+import { AccountModule } from './accnt/account.module';
+import { UserModule } from './user/..module';
+// import { AuthModule } from './auth/auth.module';\
+// import authmodule
+import { isPort } from 'class-validator';
 
 @Module({
   imports: [
@@ -16,9 +18,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    /* AccountModule,
+    AccountModule,
     UserModule,
-    AuthModule, */
+    // AuthModule,
   ],
 })
 export class AppModule { }

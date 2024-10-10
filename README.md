@@ -364,3 +364,7 @@ The 'User Module Setup' need to be setup for linking 'accnt' together for access
 Oct 7th 2024 22:01
 Just commited in 'app.accnt.spec.ts' file.
 <!-- todo --> It's time to set 'User' entity.
+
+
+Oct 10th 2024 22:01
+<!-- !Stucked in Running Test -->
