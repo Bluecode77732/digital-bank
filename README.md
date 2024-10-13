@@ -368,3 +368,8 @@ Just commited in 'app.accnt.spec.ts' file.
 
 Oct 10th 2024 22:01
 <!-- !Stucked in Running Test -->
+
+
+Oct 13th 2024 21:16
+<!-- * Resolved Stucked in Running Test : The 'jest.config.js' file and package.json both were conflicting * -->
+<!-- !The repeated Err occured during test : The `app.accnt.spec.ts` file couldn't pass the test. -->
