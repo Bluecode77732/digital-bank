@@ -373,3 +373,4 @@ Oct 10th 2024 22:01
 Oct 13th 2024 21:16
 <!-- * Resolved Stucked in Running Test : The 'jest.config.js' file and package.json both were conflicting * -->
 <!-- !The repeated Err occured during test : The `app.accnt.spec.ts` file couldn't pass the test. -->
+- Take the references from the Claude AI to fix of files that are occuring errors.
