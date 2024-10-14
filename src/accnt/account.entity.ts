@@ -12,16 +12,20 @@ export class Account {
     @Column({ type: 'decimal', precision: 12, scale: 2 })
     balance!: number;
 
-    @ManyToOne(() => User, user => user.accounts, { eager: true })
-    owner: User;
-
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
 
     @Column()
     accountType: string;
 
-    // Each account is tied to one user
-    @ManyToOne(() => User, user => user.accounts)
-    user: User;  // Reference the user entity
+    /*     // Each account is tied to one user
+        @ManyToOne(() => User, user => user.accounts)
+        user: User;  // Reference the user entity */
+
+    @ManyToOne(() => User, user => user.accounts, { eager: true })
+    owner: User;
+
+    // Remove the duplicate user property
+    // @ManyToOne(() => User, user => user.accounts)
+    // user: User;
 }

@@ -31,6 +31,60 @@ describe('AccountService', () => {
             ownerId: '1',
             initialDeposit: 100,
             accountType: 'savings',
+        };
+
+        const mockUser: Partial<User> = {
+            id: createAccountDto.ownerId,
+            name: 'testuser',
+            email: 'test@example.com',
+            accounts: [],
+        };
+
+        const createdAccount: Partial<Account> = {
+            id: '1',
+            accountNumber: createAccountDto.accountNumber,
+            balance: createAccountDto.initialDeposit,
+            owner: mockUser as User,
+            accountType: createAccountDto.accountType,
+            createdAt: new Date(),
+        };
+
+        jest.spyOn(repo, 'create').mockReturnValue(createdAccount as Account);
+        jest.spyOn(repo, 'save').mockResolvedValue(createdAccount as Account);
+
+        const result = await service.create(createAccountDto);
+        expect(result).toEqual(createdAccount);
+    });
+
+    // Additional tests for update, findAll, findOne, remove...
+});
+
+
+describe('AccountService', () => {
+    let service: AccountService;
+    let repo: Repository<Account>;
+
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            providers: [
+                AccountService,
+                {
+                    provide: getRepositoryToken(Account),
+                    useClass: Repository,
+                },
+            ],
+        }).compile();
+
+        service = module.get<AccountService>(AccountService);
+        repo = module.get<Repository<Account>>(getRepositoryToken(Account));
+    });
+
+    it('should create an account', async () => {
+        const createAccountDto: CreateAccountDto = {
+            accountNumber: '1234567890',
+            ownerId: '1',
+            initialDeposit: 100,
+            accountType: 'savings',
             // Add any other required properties from CreateAccountDto
         };
 
@@ -49,7 +103,6 @@ describe('AccountService', () => {
             owner: mockUser, // Use the mockUser object here
             accountType: createAccountDto.accountType,
             createdAt: new Date(),
-            user: new User
         };
 
         jest.spyOn(repo, 'create').mockReturnValue(createdAccount);

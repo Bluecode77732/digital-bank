@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Account } from 'src/accnt/account.entity';
 
-@Entity()
+@Entity('uers')
 export class User {
     @PrimaryGeneratedColumn()
     id: string;
@@ -13,6 +13,6 @@ export class User {
     email: string;
 
     // One user can have multiple accounts
-    @OneToMany(() => Account, account => account.user)
+    @OneToMany(() => Account, account => account.owner)
     accounts: Account[];  // Fix the missing accounts property
 }
