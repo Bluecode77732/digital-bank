@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AccountService } from './account.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Account } from './account.entity';
+import { Account } from '../accnt/account.entity';
 import { User } from '../user/user.entity'; // Make sure to import User
 import { Repository } from 'typeorm';
 import { CreateAccountDto } from './dtos/create-account.dto';
