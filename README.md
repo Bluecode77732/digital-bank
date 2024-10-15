@@ -363,7 +363,7 @@ The 'User Module Setup' need to be setup for linking 'accnt' together for access
 
 Oct 7th 2024 22:01
 Just commited in 'app.accnt.spec.ts' file.
-<!-- todo --> It's time to set 'User' entity.
+<!-- todo --> It's time to set 'User' entity.   
 
 
 Oct 10th 2024 22:01
@@ -374,3 +374,8 @@ Oct 13th 2024 21:16
 <!-- * Resolved Stucked in Running Test : The 'jest.config.js' file and package.json both were conflicting * -->
 <!-- !The repeated Err occured during test : The `app.accnt.spec.ts` file couldn't pass the test. -->
 - Take the references from the Claude AI to fix of files that are occuring errors.
+
+
+Oct 15th 2024 12:47
+<!-- ** Suceeded to debug : Incorrect import pathway ** -->
+<!-- TODO : Implement all of `User` files. -->
