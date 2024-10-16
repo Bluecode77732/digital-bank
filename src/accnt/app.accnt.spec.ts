@@ -114,3 +114,12 @@ describe('AccountService', () => {
 
     // Additional tests for update, findAll, findOne, remove...
 });
+
+describe('AccountService', () => {
+    it('should return all accounts', async () => {
+        const mockAccounts: Account[] = [
+            { id: '', accountNumber: '', balance: , owner: mockUser, accountType: '', createdAt: new Date() },
+            { id: '', accountNumber: '', balance: , owner: mockUser, accountType: '', createdAt: new Date() },
+        ]
+    })
+})
