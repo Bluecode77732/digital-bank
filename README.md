@@ -379,3 +379,7 @@ Oct 13th 2024 21:16
 Oct 15th 2024 12:47
 <!-- ** Suceeded to debug : Incorrect import pathway ** -->
 <!-- TODO : Implement all of `User` files. -->
+
+
+Oct 16th 2024 20:47 (How the hell is the time possible to match with previous one??)
+<!-- TODO : Addtional test for more `accnt` methods, then implement all of `User` files. -->
