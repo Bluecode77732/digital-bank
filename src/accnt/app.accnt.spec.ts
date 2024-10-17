@@ -138,29 +138,26 @@ describe('AccountService', () => {
         .mockResolvedValue(mockAccounts);
         
         const result = await service.findAll();
-        expect(result).toEqual(mock);
+        expect(result).toEqual(mockAccounts);
     });
 
     it('should return one account by ID', async () => {
-        const accntId = '1';
-        const mockAccount: Account = {
+        const accntId = '3';    /* Why this one alone is a variable? */
+        const mockAnAccount: Account = {
             id: accntId,
-            accountNumber: '2',
+            accountNumber: '3',
             balance: 100,
             owner: new User,
             accountType: 'savings',
             createdAt : new Date()
         }
 
-        jest.spyOn(repo, 'findOneBy').mockResolvedValue(mockAccount);
+        jest.spyOn(repo, 'findOneBy')
+        .mockResolvedValue(mockAnAccount);
 
         const result = await service.findOne(accntId);
-        expect(result).toEqual(mockAccount);
+        expect(result).toEqual(mockAnAccount);
     });
 
 
 });
-
-
-
-
