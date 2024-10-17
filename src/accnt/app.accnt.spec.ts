@@ -117,29 +117,48 @@ describe('AccountService', () => {
     
     it('should return all accounts', async () => {
         const mockAccounts: Account[] = [
-            { id: '1', accountNumber: '1', balance: 100, owner: new User, accountType: 'savings', createdAt: new Date() },
-            { id: '2', accountNumber: '1', balance: 200, owner: new User, accountType: 'checking', createdAt: new Date() },
+            { 
+                id: '1',
+                accountNumber: '1',
+                balance: 100,
+                owner: new User,
+                accountType: 'savings',
+                createdAt: new Date() },
+            { 
+                id: '2',
+                accountNumber: '2',
+                balance: 200,
+                owner: new User,
+                accountType: 'checking',
+                createdAt: new Date() 
+            },
         ];
         
-        jest.spyOn(repo, 'find').mockResolvedValue(mockAccounts);
+        jest.spyOn(repo, 'find')
+        .mockResolvedValue(mockAccounts);
         
         const result = await service.findAll();
         expect(result).toEqual(mock);
     });
 
-    it('should return oe account by ID', async () => {
+    it('should return one account by ID', async () => {
         const accntId = '1';
         const mockAccount: Account = {
-            id: accntId, accountNumber: '2', balance: 100, owner: new User, accountType: 'savings', createdAt : new Date()
+            id: accntId,
+            accountNumber: '2',
+            balance: 100,
+            owner: new User,
+            accountType: 'savings',
+            createdAt : new Date()
         }
 
-        jest.spyOn(repo, 'findOne').mockResolvedValue(mockAccount);
+        jest.spyOn(repo, 'findOneBy').mockResolvedValue(mockAccount);
 
         const result = await service.findOne(accntId);
         expect(result).toEqual(mockAccount);
     });
 
-    
+
 });
 
 
