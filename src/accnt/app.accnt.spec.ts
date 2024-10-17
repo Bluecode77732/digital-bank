@@ -158,6 +158,4 @@ describe('AccountService', () => {
         const result = await service.findOne(accntId);
         expect(result).toEqual(mockAnAccount);
     });
-
-
 });
