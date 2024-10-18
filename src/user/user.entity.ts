@@ -12,6 +12,9 @@ export class User {
     @Column()
     email: string;
 
+    @Column()
+    password: string
+
     // One user can have multiple accounts
     @OneToMany(() => Account, account => account.owner)
     accounts: Account[];  // Fix the missing accounts property
