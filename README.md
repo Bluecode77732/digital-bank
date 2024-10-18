@@ -385,5 +385,9 @@ Oct 16th 2024 20:47 (How the hell is the time possible to match with previous on
 <!-- TODO : Addtional test for more `accnt` methods, then implement all of `User` files. -->
 
 
-Oct 16th 2024 12:47 
+Oct 18th 2024 12:47 
 <!-- User implementation - 313Ln in file structure -->
+
+
+Oct 18th 2024 21:44 
+<!-- TODO : Generating DTO of User -->
