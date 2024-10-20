@@ -391,3 +391,7 @@ Oct 18th 2024 12:47
 
 Oct 18th 2024 21:44 
 <!-- TODO : Generating DTO of User -->
+
+
+Oct 20th 2024 20:19
+<!-- Came to check and imagined me telling someone what is 'uuid' and its interface. -->
