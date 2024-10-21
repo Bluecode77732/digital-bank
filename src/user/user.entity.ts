@@ -4,18 +4,18 @@ import { Account } from '../accnt/account.entity';
 @Entity('uers')
 export class User {
     @PrimaryGeneratedColumn()
-    id: string;
+    id!: string;
+    
+    @Column()
+    username!: string;
 
     @Column()
-    name: string;
+    email!: string;
 
     @Column()
-    email: string;
-
-    @Column()
-    password: string
+    password!: string
 
     // One user can have multiple accounts
     @OneToMany(() => Account, account => account.owner)
-    accounts: Account[];  // Fix the missing accounts property
+    accounts!: Account[];  // Fix the missing accounts property
 }
