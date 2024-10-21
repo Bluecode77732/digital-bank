@@ -351,7 +351,7 @@ Oct 4th 2024 14:11
 
 Oct 5th 2024 22:11
 <!-- TODO : (By ChatGPT 4o - Creating Digital Bank Transactions)Next Steps: -->
-- 'User Module Setup': The Account entity references a User, so make sure you have a basic *user.entity.ts* and *user.service.ts* ready. If you need help with that, let me know.
+- 'User Module Setup': The Account entity references a User, so make sure you have a basic *user.entity.ts* and *user.service.ts* ready.
 
 - Database Setup: Ensure PostgreSQL is running and update your app.module.ts to use your PostgreSQL credentials.
 
@@ -395,3 +395,7 @@ Oct 18th 2024 21:44
 
 Oct 20th 2024 20:19
 <!-- Came to check and imagined me telling someone what is 'uuid' and its interface. -->
+
+
+Oct 20th 2024 19:19
+<!-- * The 'UserService' test : Succeed * -->
