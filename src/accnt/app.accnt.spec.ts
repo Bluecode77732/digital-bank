@@ -36,7 +36,7 @@ describe('AccountService', () => {
 
         const mockUser: Partial<User> = {
             id: createAccountDto.ownerId,
-            name: 'testuser',
+            username: 'testuser',
             email: 'test@example.com',
             accounts: [],
         };
@@ -92,8 +92,9 @@ describe('AccountService', () => {
         const mockUser: User = {
             id: createAccountDto.ownerId,
             // Add other required User properties
-            name: 'testuser',
+            username: 'testuser',
             email: 'test@example.com',
+            password : 'pw123',
             accounts: []
         };
 

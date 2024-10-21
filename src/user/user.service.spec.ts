@@ -4,7 +4,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
-import { Account } from '@/accnt/account.entity';
+// import { Account } from '@/accnt/account.entity';
 
 describe('UserService', () => {
     let service: UserService;
@@ -34,7 +34,7 @@ describe('UserService', () => {
         };
 
         jest.spyOn(repo, 'create').mockReturnValue(user as any);
-        jest.spyOn(repo, 'save').mockResolvedValue(user);
+        jest.spyOn(repo, 'save').mockResolvedValue(user as any);
 
         const result = await service.create(user);
         expect(result).toEqual(user);
@@ -53,11 +53,11 @@ describe('UserService', () => {
                 createdAt:  new Date(),
                 accountType: 'string',
                 owner: {
-                    id!:
-                    username!:
-                    email!:
-                    password!:
-                    accounts!:
+                    id: '123',
+                    username: '456',
+                    email: '@',
+                    password: '789',
+                    accounts: [],
                 },
             }]
         }];
