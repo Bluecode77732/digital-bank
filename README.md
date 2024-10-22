@@ -397,5 +397,9 @@ Oct 20th 2024 20:19
 <!-- Came to check and imagined me telling someone what is 'uuid' and its interface. -->
 
 
-Oct 20th 2024 19:19
+Oct 21th 2024 19:19
 <!-- * The 'UserService' test : Succeed * -->
+
+
+Oct 22th 2024 20:49
+<!--! TODO : Prioritize Orders for Implementation -->
