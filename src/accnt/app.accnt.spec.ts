@@ -95,7 +95,8 @@ describe('AccountService', () => {
             username: 'testuser',
             email: 'test@example.com',
             password : 'pw123',
-            accounts: []
+            accounts: [],
+            trscs: [],
         };
 
         const createdAccount: Account = {
@@ -105,6 +106,7 @@ describe('AccountService', () => {
             owner: mockUser, // Use the mockUser object here
             accountType: createAccountDto.accountType,
             createdAt: new Date(),
+            trscs: mockUser,
         };
 
         jest.spyOn(repo, 'create').mockReturnValue(createdAccount);
@@ -124,14 +126,17 @@ describe('AccountService', () => {
                 balance: 100,
                 owner: new User,
                 accountType: 'savings',
-                createdAt: new Date() },
+                createdAt: new Date(),
+                trscs: new User,
+            },
             { 
                 id: '2',
                 accountNumber: '2',
                 balance: 200,
                 owner: new User,
                 accountType: 'checking',
-                createdAt: new Date() 
+                createdAt: new Date(),
+                trscs: new User,
             },
         ];
         
@@ -150,7 +155,8 @@ describe('AccountService', () => {
             balance: 100,
             owner: new User,
             accountType: 'savings',
-            createdAt : new Date()
+            createdAt : new Date(),
+            trscs: new User,
         }
 
         jest.spyOn(repo, 'findOneBy')

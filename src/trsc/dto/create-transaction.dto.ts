@@ -1,12 +1,16 @@
-import { IsString, IsUUID } from "class-validator";
+import { IsOptional, IsString, IsUUID } from "class-validator";
 
 export class CreateTrscDto {
-    @IsUUID()
-    accountId: string;
+    @IsString()
+    fromAccountId: string;
+    
+    @IsOptional()
+    @IsString()
+    toAccountId: string;
     
     @IsString()
-    trscType: string;
+    trscType!: string;
 
     @IsString()
-    amount: number;
+    amount!: number;
 }

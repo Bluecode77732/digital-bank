@@ -15,6 +15,12 @@ export class Trsc {
     @CreateDateColumn()
     createdAt: Date;
 
-    @ManyToOne(() => Account, account => account.trscs, {onDelete : 'CASCADE'}) /* WTH IS CASCADE? NV SEEN LIKE THIS ONE LOL */
-    account: Account;
+    /* @ManyToOne(() => Account, account => account.trscs, {onDelete : 'CASCADE'}) //WTH IS CASCADE? NV SEEN LIKE THIS ONE LOL
+    fromAccount: Account; */
+    
+    @ManyToOne(() => Account, account => account.trscs) 
+    fromAccount: Account;
+    
+    @ManyToOne(() => Account, {nullable : true}) 
+    toAccount: Account;
 }

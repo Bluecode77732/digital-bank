@@ -11,8 +11,8 @@ export class TrscService {
         private trscRepository: Repository<Transaction>,
         private accntService: AccountService,
     ) {}
-
-    async create(createTrscDto: CreateTrscDto) : Promise<Transaction> {
+    
+    /* async create(createTrscDto: CreateTrscDto) : Promise<Transaction> {
         // Find specific account A.
         const accnt = await this.accntService.findOne(createTrscDto.accountId);
         // with the A, make the transaction to perform.
@@ -20,13 +20,20 @@ export class TrscService {
             ...createTrscDto,
             accnt,
         });
-
+            
         // Update account balance based on the transaction type
         if(createTrscDto.trscType === 'deposit') {
             accnt.balance += createTrscDto.amount;
-        } else if(createTrscDto.trscType === 'withdrawal') {
-            accnt.balance += createTrscDto.amount;
-        }
+            } else if(createTrscDto.trscType === 'withdrawal') {
+                accnt.balance += createTrscDto.amount;
+            }
+        } 
+    */
+
+    async create(createTrscDto: CreateTrscDto) : Promise<Transaction> {
+        const { fromAccountId, toAccountId, trscType, amount } = createTrscDto;
+
+        const fromAccountId = await this.accrepo
     }
 
     findByAccnt(accntId: string) : Promise<Transaction[]> {
