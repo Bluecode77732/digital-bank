@@ -18,4 +18,7 @@ export class User {
     // One user can have multiple accounts
     @OneToMany(() => Account, account => account.owner)
     accounts!: Account[];  // Fix the missing accounts property
+    
+    @OneToMany(() => Account, account => account.owner)
+    trscs!: Account[];  
 }

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 import { User } from '../user/user.entity';
 
 @Entity('accounts')
@@ -24,6 +24,9 @@ export class Account {
 
     @ManyToOne(() => User, user => user.accounts, { eager: true })
     owner: User;
+    
+    @OneToMany(() => User, user => user.accounts, { eager: true })
+    trscs: User;
 
     // Remove the duplicate user property
     // @ManyToOne(() => User, user => user.accounts)
