@@ -23,10 +23,10 @@ export class Account {
         user: User;  // Reference the user entity */
 
     @ManyToOne(() => User, user => user.accounts, { eager: true })
-    owner: User;
+    owner!: User;
     
     @OneToMany(() => User, user => user.accounts, { eager: true })
-    trscs: User;
+    trscs!: User;
 
     // Remove the duplicate user property
     // @ManyToOne(() => User, user => user.accounts)

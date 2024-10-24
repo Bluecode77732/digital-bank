@@ -20,5 +20,5 @@ export class User {
     accounts!: Account[];  // Fix the missing accounts property
     
     @OneToMany(() => Account, account => account.owner)
-    trscs!: Account[];  
+    trscs: Account[];  
 }

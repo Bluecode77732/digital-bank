@@ -1,9 +1,10 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Transaction } from 'typeorm';
 import { TrscService } from './trsc.service';
+import { CreateTrscDto } from './dto/create-transaction.dto';
 
-@Controller('trsc')
+@Controller('trscs')
 export class TrscController {
     constructor(private readonly trscService: TrscService) {}
 
@@ -12,10 +13,15 @@ export class TrscController {
         return this.trscService.findByAccnt(accountId);
     }
     
-    findAllAccnt
+    @Get()
+    findAllAccnt() {
+        return this.trscService.findAllAccnt();
+    }
 
     @Post() 
-    create() {}
+    create(@Body() createTrscDto: CreateTrscDto) {
+        return this.trscService.create(createTrscDto);
+    }
     
     
 }
