@@ -15,7 +15,7 @@ export class TrscController {
     
     @Get()
     findAllAccnt() {
-        return this.trscService.findAllAccnt();
+        return this.trscService.findAll();
     }
 
     @Post() 

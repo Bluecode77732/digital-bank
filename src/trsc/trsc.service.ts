@@ -5,128 +5,126 @@ import { CreateTrscDto } from "./dto/create-transaction.dto";
 import { Account } from "@/accnt/account.entity";
 import { Trsc } from "./trsc.entity";
 
+type TrscType = 'withdrawal' | 'deposit' | 'transfer';
+
 @Injectable()
 export class TrscService {
     constructor(
         @InjectRepository(Trsc)
-        private transactionRepo: Repository<Trsc>,
+        private transactions: Repository<Trsc>,
         @InjectRepository(Account)
-        private accountRepo: Repository<Account>,
-        private dataSource: DataSource, // Inject DataSource for transactions
+        private accounts: Repository<Account>,
+        private db: DataSource,
     ) { }
 
-    async create(createTrscDto: CreateTrscDto): Promise<Trsc> {
-        const { fromAccountId, toAccountId, trscType, amount } = createTrscDto;
-
-        // Start a database transaction
-        const queryRunner = this.dataSource.createQueryRunner();
-        await queryRunner.connect();
-        await queryRunner.startTransaction();
+    async create(dto: CreateTrscDto): Promise<Trsc> {
+        const runner = this.db.createQueryRunner();
+        await runner.connect();
+        await runner.startTransaction();
 
         try {
-            // Validate amount
-            if (amount <= 0) {
-                throw new BadRequestException('Transaction amount must be positive');
+            if (dto.amount <= 0) {
+                throw new BadRequestException('Amount must be positive');
             }
 
-            // Get fromAccount with lock
-            const fromAccount = await this.accountRepo.findOne({
-                where: { id: fromAccountId },
+            // Load accounts with locks to prevent race conditions
+            const from = await this.accounts.findOne({
+                where: { id: dto.fromAccountId },
                 lock: { mode: 'pessimistic_write' }
             });
 
-            if (!fromAccount) {
+            if (!from) {
                 throw new NotFoundException('Source account not found');
             }
 
-            let toAccount: Account | null = null;
-            if (toAccountId) {
-                toAccount = await this.accountRepo.findOne({
-                    where: { id: toAccountId },
+            // Only load destination account if it's a transfer
+            let to = null;
+            if (dto.trscType === 'transfer') {
+                if (!dto.toAccountId) {
+                    throw new BadRequestException('Transfer requires destination account');
+                }
+
+                to = await this.accounts.findOne({
+                    where: { id: dto.toAccountId },
                     lock: { mode: 'pessimistic_write' }
                 });
 
-                if (!toAccount) {
+                if (!to) {
                     throw new NotFoundException('Destination account not found');
                 }
             }
 
-            // Validate sufficient balance for withdrawals and transfers
-            if ((trscType === 'withdrawal' || trscType === 'transfer') && fromAccount.balance < amount) {
-                throw new BadRequestException('Insufficient balance');
+            // Ensure sufficient funds for withdrawals/transfers
+            if (['withdrawal', 'transfer'].includes(dto.trscType) && from.balance < dto.amount) {
+                throw new BadRequestException('Insufficient funds');
             }
 
-            // Create transaction record
-            const transaction = this.transactionRepo.create({
-                fromAccount,
-                toAccount,
-                trscType,
-                amount,
-                status: 'completed',
+            // Update balances based on transaction type
+            this.updateBalances(from, to, dto.trscType, dto.amount);
+
+            // Save everything
+            const trsc = await this.transactions.save({
+                fromAccount: from,
+                toAccount: to,
+                amount: dto.amount,
+                trscType: dto.trscType,
                 timestamp: new Date()
             });
 
-            // Update account balances based on transaction type
-            switch (trscType) {
-                case 'withdrawal':
-                    fromAccount.balance -= amount;
-                    break;
-                case 'deposit':
-                    fromAccount.balance += amount;
-                    break;
-                case 'transfer':
-                    if (!toAccount) {
-                        throw new BadRequestException('Destination account required for transfer');
-                    }
-                    fromAccount.balance -= amount;
-                    toAccount.balance += amount;
-                    break;
-                default:
-                    throw new BadRequestException('Invalid transaction type');
+            await this.accounts.save(from);
+            if (to) {
+                await this.accounts.save(to);
             }
 
-            // Save all changes within the transaction
-            await this.transactionRepo.save(transaction);
-            await this.accountRepo.save(fromAccount);
-            if (toAccount) {
-                await this.accountRepo.save(toAccount);
-            }
-
-            // Commit the transaction
-            await queryRunner.commitTransaction();
-            return transaction;
+            await runner.commitTransaction();
+            return trsc;
 
         } catch (error) {
-            // Rollback in case of any error
-            await queryRunner.rollbackTransaction();
+            await runner.rollbackTransaction();
             throw error;
         } finally {
-            // Release the query runner
-            await queryRunner.release();
+            await runner.release();
         }
     }
 
-    async findByAccount(id: number): Promise<Trsc[]> {
-        const transactions = await this.transactionRepo.find({
+    private updateBalances(from: Account, to: Account | null, type: TransactionType, amount: number): void {
+        switch (type) {
+            case 'withdrawal':
+                from.balance -= amount;
+                break;
+            case 'deposit':
+                from.balance += amount;
+                break;
+            case 'transfer':
+                from.balance -= amount;
+                to.balance += amount;
+                break;
+        }
+    }
+
+    async findByAccount(accountId: number): Promise<Trsc[]> {
+        const transactions = await this.transactions.find({
             where: [
-                { fromAccount: { id } },
-                { toAccount: { id } }
+                { fromAccount: { id: accountId } },
+                { toAccount: { id: accountId } }
             ],
             relations: ['fromAccount', 'toAccount'],
-            order: { timestamp: 'DESC' }
+            order: { timestamp: 'DESC' },
+            take: 50  // Limit to last 50 transactions by default
         });
 
         if (!transactions.length) {
-            throw new NotFoundException('No transactions found for this account');
+            throw new NotFoundException('No transactions found');
         }
 
         return transactions;
     }
 
-    async findAll(): Promise<Trsc[]> {
-        return this.transactionRepo.find({
+    async findAll(limit = 100): Promise<Trsc[]> {
+        return this.transactions.find({
             relations: ['fromAccount', 'toAccount'],
-            order: { timestamp: 'DESC' }
+            order: { timestamp: 'DESC' },
+            take: limit
         });
     }
 }
