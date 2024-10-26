@@ -464,3 +464,8 @@ Oct 24th 2024 18:58
 Oct 25th 2024 12:41
 <!-- TODO : Implementing Trsc service -->
 
+
+Oct 26th 2024 12:14
+Oct 26th 2024 17:34
+<!-- TODO : Debugging and improving Trsc service -->
+<!-- !Claude Implemented Trsc service and its DTOs -->

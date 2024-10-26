@@ -1,11 +1,10 @@
+// The main service file
 import { Injectable, NotFoundException, BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, DataSource } from "typeorm";
-import { CreateTrscDto } from "./dto/create-transaction.dto";
+import { CreateTrscDto } from "./dto/create-trsc.dto";
 import { Account } from "@/accnt/account.entity";
 import { Trsc } from "./trsc.entity";
-
-type TrscType = 'withdrawal' | 'deposit' | 'transfer';
 
 @Injectable()
 export class TrscService {
@@ -27,7 +26,6 @@ export class TrscService {
                 throw new BadRequestException('Amount must be positive');
             }
 
-            // Load accounts with locks to prevent race conditions
             const from = await this.accounts.findOne({
                 where: { id: dto.fromAccountId },
                 lock: { mode: 'pessimistic_write' }
@@ -37,7 +35,6 @@ export class TrscService {
                 throw new NotFoundException('Source account not found');
             }
 
-            // Only load destination account if it's a transfer
             let to = null;
             if (dto.trscType === 'transfer') {
                 if (!dto.toAccountId) {
@@ -54,7 +51,6 @@ export class TrscService {
                 }
             }
 
-            // Ensure sufficient funds for withdrawals/transfers
             if (['withdrawal', 'transfer'].includes(dto.trscType) && from.balance < dto.amount) {
                 throw new BadRequestException('Insufficient funds');
             }
@@ -62,15 +58,17 @@ export class TrscService {
             // Update balances based on transaction type
             this.updateBalances(from, to, dto.trscType, dto.amount);
 
-            // Save everything
-            const trsc = await this.transactions.save({
+            // Create new transaction
+            const trsc = this.transactions.create({
                 fromAccount: from,
                 toAccount: to,
                 amount: dto.amount,
                 trscType: dto.trscType,
-                timestamp: new Date()
+                createdAt: new Date()  // Changed from timestamp to createdAt
             });
 
+            // Save all changes
+            await this.transactions.save(trsc);
             await this.accounts.save(from);
             if (to) {
                 await this.accounts.save(to);
@@ -87,7 +85,7 @@ export class TrscService {
         }
     }
 
-    private updateBalances(from: Account, to: Account | null, type: TransactionType, amount: number): void {
+    private updateBalances(from: Account, to: Account | null, type: CreateTrscDto['trscType'], amount : number): void {
         switch (type) {
             case 'withdrawal':
                 from.balance -= amount;
@@ -96,21 +94,22 @@ export class TrscService {
                 from.balance += amount;
                 break;
             case 'transfer':
+                if (!to) throw new Error('Destination account required for transfer');
                 from.balance -= amount;
                 to.balance += amount;
                 break;
         }
     }
 
-    async findByAccount(accountId: number): Promise<Trsc[]> {
+    async findByAccnt(accountId: string): Promise<Trsc[]> {
         const transactions = await this.transactions.find({
             where: [
                 { fromAccount: { id: accountId } },
                 { toAccount: { id: accountId } }
             ],
             relations: ['fromAccount', 'toAccount'],
-            order: { timestamp: 'DESC' },
-            take: 50  // Limit to last 50 transactions by default
+            order: { createdAt: 'DESC' },  // Changed from timestamp to createdAt
+            take: 50
         });
 
         if (!transactions.length) {
@@ -123,7 +122,7 @@ export class TrscService {
     async findAll(limit = 100): Promise<Trsc[]> {
         return this.transactions.find({
             relations: ['fromAccount', 'toAccount'],
-            order: { timestamp: 'DESC' },
+            order: { createdAt: 'DESC' },  // Changed from timestamp to createdAt
             take: limit
         });
     }

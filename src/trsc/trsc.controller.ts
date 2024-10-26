@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Transaction } from 'typeorm';
 import { TrscService } from './trsc.service';
-import { CreateTrscDto } from './dto/create-transaction.dto';
+import { CreateTrscDto } from './dto/create-trsc.dto';
 
 @Controller('trscs')
 export class TrscController {
