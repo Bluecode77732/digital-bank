@@ -26,7 +26,7 @@ export class Account {
     owner!: User;
     
     @OneToMany(() => User, user => user.accounts, { eager: true })
-    trscs!: User;
+    trscs!: User[];
 
     // Remove the duplicate user property
     // @ManyToOne(() => User, user => user.accounts)

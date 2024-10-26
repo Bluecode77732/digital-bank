@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from './user.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from './user.entity';
-import { Repository } from 'typeorm';
+import { CannotAttachTreeChildrenEntityError, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 // import { Account } from '@/accnt/account.entity';
 
@@ -26,11 +26,11 @@ describe('UserService', () => {
     });
 
     it('should create a user', async () => {
-        const user : CreateUserDto = { 
-            id: '1', 
-            username: 'test', 
-            email: 'test@test.com', 
-            password: 'password' 
+        const user: CreateUserDto = {
+            id: '1',
+            username: 'test',
+            email: 'test@test.com',
+            password: 'password'
         };
 
         jest.spyOn(repo, 'create').mockReturnValue(user as any);
@@ -40,17 +40,18 @@ describe('UserService', () => {
         expect(result).toEqual(user);
     });
 
+    // test file with both levels of transactions
     it('should find all users', async () => {
-        const users: User[] = [{ 
-            id: '1', 
-            username: 'test', 
-            email: 'test@test.com', 
+        const users: User[] = [{
+            id: '1',
+            username: 'test',
+            email: 'test@test.com',
             password: 'password',
             accounts: [{
                 id: '123',
                 accountNumber: '456',
                 balance: 789,
-                createdAt:  new Date(),
+                createdAt: new Date(),
                 accountType: 'string',
                 owner: {
                     id: '123',
@@ -58,8 +59,26 @@ describe('UserService', () => {
                     email: '@',
                     password: '789',
                     accounts: [],
+                    trscs: [], // User-level transactions in nested owner
                 },
-            }]
+                trscs: [{   // Now this is an Account type
+                    id: '789',
+                    username: '101112',
+                    email: '@',
+                    password: '789',
+                    accounts: [],
+                    /* owner: {
+                        id: '123',
+                        username: '456',
+                        email: '@',
+                        password: '789',
+                        accounts: [],
+                        trscs: [],
+                    }, */
+                    trscs: [] // This account's transactions
+                }],
+            }],
+            trscs: [],
         }];
 
         jest.spyOn(repo, 'find').mockResolvedValue(users);
@@ -69,11 +88,11 @@ describe('UserService', () => {
     });
 
     it('should find one user by ID', async () => {
-        const user = { 
-            id: '1', 
-            username: 'test', 
-            email: 'test@test.com', 
-            password: 'password' 
+        const user = {
+            id: '1',
+            username: 'test',
+            email: 'test@test.com',
+            password: 'password'
         };
 
         jest.spyOn(repo, 'findOne').mockResolvedValue(user as any);
