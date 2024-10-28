@@ -30,7 +30,12 @@ describe('TrscController', () => {
   describe('create', () => {
     it('should create a transaction and return it', async () => {
       const dto: CreateTrscDto = { fromAccountId: '1', trscType: 'deposit', amount: 100 };
-      const trsc = { id: '123', fromAccountId: '1', trscType: 'deposit', amount: 100 };
+      const trsc = { 
+        id: '123', 
+        fromAccountId: '1', 
+        trscType: 'deposit', 
+        amount: 100
+      };
 
       jest.spyOn(service, 'create').mockResolvedValue(trsc as any);
       const result = await controller.create(dto);
@@ -40,7 +45,9 @@ describe('TrscController', () => {
 
   describe('findAll', () => {
     it('should return an array of transactions', async () => {
-      const transactions = [{ id: '123', amount: 100 }];
+      const transactions = [
+        { id: '123', amount: 100 }
+      ];
       jest.spyOn(service, 'findAll').mockResolvedValue(transactions as any);
 
       const result = await controller.findAllAccnt();
@@ -50,7 +57,9 @@ describe('TrscController', () => {
 
   describe('findByAccnt', () => {
     it('should return transactions for an account ID', async () => {
-      const transactions = [{ id: '123', amount: 100 }];
+      const transactions = [
+        { id: '123', amount: 100 }
+      ];
       jest.spyOn(service, 'findByAccnt').mockResolvedValue(transactions as any);
 
       const result = await controller.findByAccnt('123');
