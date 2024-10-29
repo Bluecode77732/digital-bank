@@ -255,7 +255,7 @@ digital-bank-system/
 │   │       ├── kyc.dto.ts                  # Data Transfer Object for KYC
 │   │       └── aml.dto.ts                  # Data Transfer Object for AML
 │   ├── common/                       # Shared utilities and filters
-│   │   ├── encryption.service.ts         # Encryption services
+│   │   ├── <!-- encryption.service.ts         # Encryption services -->
 │   │   ├── filters/                      # Global exception filters
 │   │   │   └── all-exceptions.filter.ts     # Handle exceptions globally
 │   │   ├── pipes/
@@ -480,3 +480,8 @@ Oct 26th 2024 22:19
 Oct 28th 2024 12:27
 <!-- * Test files `Service` and `Controller` have passed the test * -->
 <!-- TODO: To Implement Prior Modules -->
+
+
+Oct 29th 2024 13:20
+<!-- TODO: Implement Common Module -->
+<!-- Do Common and DB can be shared together? -->
