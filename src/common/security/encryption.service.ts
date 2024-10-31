@@ -23,3 +23,97 @@ export class EncryptionService {
         return decrypted.toString();
     }
 }
+
+
+// security/encryption.service.ts
+import { Injectable } from '@nestjs/common';
+import { createCipheriv, createDecipheriv, randomBytes, scrypt } from 'crypto';
+import { promisify } from 'util';
+import { LoggingService } from '../logging/logging.service';
+
+@Injectable()
+export class EncryptionService {
+    private readonly algorithm = 'aes-256-gcm';
+    private readonly keyLength = 32;
+    private readonly ivLength = 16;
+    private readonly saltLength = 32;
+    private readonly authTagLength = 16;
+
+    constructor(
+        private readonly loggingService: LoggingService,
+        private readonly config: {
+            encryptionKey: string;
+        },
+    ) { }
+
+    async encrypt(data: string): Promise<string> {
+        try {
+            const salt = randomBytes(this.saltLength);
+            const iv = randomBytes(this.ivLength);
+
+            const key = await promisify(scrypt)(
+                this.config.encryptionKey,
+                salt,
+                this.keyLength,
+            ) as Buffer;
+
+            const cipher = createCipheriv(this.algorithm, key, iv, {
+                authTagLength: this.authTagLength,
+            });
+
+            const encrypted = Buffer.concat([
+                cipher.update(data, 'utf8'),
+                cipher.final(),
+            ]);
+
+            const authTag = cipher.getAuthTag();
+
+            const result = Buffer.concat([
+                salt,
+                iv,
+                authTag,
+                encrypted,
+            ]).toString('base64');
+
+            return result;
+        } catch (error) {
+            this.loggingService.error('Encryption failed', { error });
+            throw new Error('Encryption failed');
+        }
+    }
+
+    async decrypt(encryptedData: string): Promise<string> {
+        try {
+            const buffer = Buffer.from(encryptedData, 'base64');
+
+            const salt = buffer.subarray(0, this.saltLength);
+            const iv = buffer.subarray(this.saltLength, this.saltLength + this.ivLength);
+            const authTag = buffer.subarray(
+                this.saltLength + this.ivLength,
+                this.saltLength + this.ivLength + this.authTagLength,
+            );
+            const encrypted = buffer.subarray(this.saltLength + this.ivLength + this.authTagLength);
+
+            const key = await promisify(scrypt)(
+                this.config.encryptionKey,
+                salt,
+                this.keyLength,
+            ) as Buffer;
+
+            const decipher = createDecipheriv(this.algorithm, key, iv, {
+                authTagLength: this.authTagLength,
+            });
+            decipher.setAuthTag(authTag);
+
+            const decrypted = Buffer.concat([
+                decipher.update(encrypted),
+                decipher.final(),
+            ]);
+
+            return decrypted.toString('utf8');
+        } catch (error) {
+            this.loggingService.error('Decryption failed', { error });
+            throw new Error('Decryption failed');
+        }
+    }
+}
