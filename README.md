@@ -397,7 +397,7 @@ Oct 20th 2024 20:19
 <!-- Came to check and imagined me telling someone what is 'uuid' and its interface. -->
 
 
-Oct 21th 2024 19:19
+Oct 21st 2024 19:19
 <!-- * The 'UserService' test : Succeed * -->
 
 
@@ -485,3 +485,7 @@ Oct 28th 2024 12:27
 Oct 29th 2024 13:20
 <!-- TODO: Implement Common Module -->
 <!-- Do Common and DB can be shared together? -->
+
+
+Nov 1st 2024 12:33
+<!-- TODO: Analyze codes -->

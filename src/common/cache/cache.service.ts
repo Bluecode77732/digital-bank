@@ -24,7 +24,7 @@ export class CacheService {
                 return delay;
             },
             reconnectOnError: (err: Error) => {
-                this.loggingService.error('Redis connection error', { error: err });
+                this.loggingService.error('Redis connection error', '{ error: err }');  //Should { error: err } need in here?
                 return true;
             },
         });
@@ -35,7 +35,7 @@ export class CacheService {
             const value = await this.redis.get(key);
             return value ? JSON.parse(value) : null;
         } catch (error) {
-            this.loggingService.error('Cache get error', { error, key });
+            this.loggingService.error('Cache get error', '{ error, key }');
             return null;
         }
     }
@@ -44,7 +44,7 @@ export class CacheService {
         try {
             await this.redis.set(key, JSON.stringify(value), 'EX', ttl);
         } catch (error) {
-            this.loggingService.error('Cache set error', { error, key });
+            this.loggingService.error('Cache set error', '{ error, key }');
         }
     }
 
@@ -52,7 +52,7 @@ export class CacheService {
         try {
             await this.redis.del(key);
         } catch (error) {
-            this.loggingService.error('Cache delete error', { error, key });
+            this.loggingService.error('Cache delete error', '{ error, key }');
         }
     }
 
