@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+/* import { Injectable, Logger } from "@nestjs/common";
 
 @Injectable()
 export class LoggingService {
@@ -17,7 +17,7 @@ export class LoggingService {
     }
 }
 
-
+ */
 // logging/logging.service.ts
 import { Injectable } from '@nestjs/common';
 import * as winston from 'winston';
@@ -80,7 +80,7 @@ export class LoggingService {
         );
     }
 
-    error(message: string, meta?: any): void {
+    error(message: string, meta?: {}): void {
         this.logger.error(message, { metadata: meta });
     }
 
