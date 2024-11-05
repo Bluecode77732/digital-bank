@@ -493,3 +493,7 @@ Nov 1st 2024 12:33
 
 Nov 4st 2024 12:59
 <!-- TODO: Fixing codes -->
+
+
+Nov 5st 2024 12:29
+<!-- TODO: Understanding codes -->
