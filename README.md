@@ -491,9 +491,13 @@ Nov 1st 2024 12:33
 <!-- TODO: Analyze codes -->
 
 
-Nov 4st 2024 12:59
+Nov 4th 2024 12:59
 <!-- TODO: Fixing codes -->
 
 
-Nov 5st 2024 12:29
+Nov 5th 2024 12:29
+<!-- TODO: Understanding codes -->
+
+
+Nov 6th 2024 21:03
 <!-- TODO: Understanding codes -->
