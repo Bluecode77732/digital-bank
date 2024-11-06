@@ -1,4 +1,4 @@
-import { Injectable, CanActivate, ExecutionContext, ThrottlerGuard, Throttle } from "@nestjs/throttler";
+/* import { Injectable, CanActivate, ExecutionContext, ThrottlerGuard, Throttle } from "@nestjs/throttler";
 import { Reflector } from "@nestjs/core";
 
 @Injectable()
@@ -7,12 +7,12 @@ export class ThrottleGuard extends ThrottlerGuard {
         super(reflector);
     }
 
-    //Why is this protected?
+    //Why is this specifically protected?
     protected async handleRequest(context: ExecutionContext, limit: number, ttl: number) {
         // Custom throttle behavior can be added here
         return super.handleRequest(context, limit, ttl);
     }
-}
+} */
 
 
 // guards/throttle.guard.ts

@@ -16,8 +16,9 @@ export class LoggingService {
         this.logger.error(message, trace);
     }
 }
+*/
 
- */
+
 // logging/logging.service.ts
 import { Injectable } from '@nestjs/common';
 import * as winston from 'winston';
