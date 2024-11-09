@@ -13,9 +13,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
         const request = ctx.getRequest<Request>();
 
         const status =
-            exception instanceof HttpException  //What are these lines?
-                ? exception.getStatus() //What are these lines?
-                : HttpStatus.INTERNAL_SERVER_ERROR; //What are these lines?
+            exception instanceof HttpException  //What is instanceof meaning?
+                ? exception.getStatus() //What is ? and : meaning?
+                : HttpStatus.INTERNAL_SERVER_ERROR; //What is ? and : meaning?
 
         const errorResponse = {
             statusCode: status,
@@ -23,8 +23,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
             path: request.url,
             method: request.method,
             message: exception instanceof HttpException
-                ? exception.message //What are these lines?
-                : 'Internal server error',  //What are these lines?
+                ? exception.message //What is ? and : meaning?
+                : 'Internal server error',  //What is ? and : meaning?
             correlationId: request.headers['x-correlation-id'],
         };
 
