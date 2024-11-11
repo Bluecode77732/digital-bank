@@ -4,6 +4,7 @@ import { ValidationPipe } from './validation.pipe';
 import { LoggingService } from '../logging/logging.service';
 import { BadRequestException } from '@nestjs/common';
 import { IsString } from 'class-validator';
+import { createMock } from '@golevelup/ts-jest';
 
 class TestDto {
   @IsString()
@@ -31,7 +32,7 @@ describe('ValidationPipe', () => {
 
   it('should validate correct data', async () => {
     const testData = { name: 'test' };
-    const result = await pipe.transform(testData, { metatype: TestDto });
+    const result = await pipe.transform(testData, { metatype : TestDto });
     expect(result).toEqual(testData);
   });
 
