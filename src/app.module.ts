@@ -13,7 +13,7 @@ import { isPort } from 'class-validator';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'password',
+      password: '',
       database: 'digital_bank',
       autoLoadEntities: true,
       synchronize: true,
