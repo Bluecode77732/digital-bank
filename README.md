@@ -509,3 +509,15 @@ Nov 10th 2024 18:04
 
 Nov 11th 2024 19:06
 <!-- TODO: Testing codes -->
+
+
+Nov 12th 2024 22:32
+<!-- * A pipe file testing passed * -->
+<!-- The error explain : 
+    1. Argument of type '{ metatype: typeof TestDto; }' is not assignable to parameter of type 'ArgumentMetadata'.
+
+   !2. Property 'type' is missing in type '{ metatype: typeof TestDto; }' but required in type 'ArgumentMetadata'.ts(2345) 
+   * It means, as it is written, 'type' was missing in the property. The `type` exist as a type inside of `ArgumentMetadata` as for an interface. And the `type` has the `Paramtype` which looks like this : ```export type Paramtype = 'body' | 'query' | 'param' | 'custom';``` *
+    
+    3. pipe-transform.interface.d.ts(15, 14): 'type' is declared here. 
+-->
