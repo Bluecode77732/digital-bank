@@ -8,24 +8,31 @@ describe('EncryptionService', () => {
     let loggingService: jest.Mocked<LoggingService>;
 
     beforeEach(async () => {
+        // Clear mock calls before each test
+        jest.clearAllMocks();
+        
+        loggingService = createMock<LoggingService>();
+
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 {
                     provide: EncryptionService,
                     useFactory: () => new EncryptionService(
-                        createMock<LoggingService>(),
+                        // createMock<LoggingService>(),
+                        loggingService,
                         { encryptionKey: 'test-key-32-chars-long-for-testing' },
                     ),
                 },
                 {
                     provide: LoggingService,
-                    useValue: createMock<LoggingService>(),
+                    useValue: loggingService,
+                    // useValue: createMock<LoggingService>(),
                 },
             ],
         }).compile();
 
         service = module.get<EncryptionService>(EncryptionService);
-        loggingService = module.get(LoggingService);
+        // loggingService = module.get(LoggingService);
     });
 
     it('should encrypt and decrypt data', async () => {
@@ -38,8 +45,27 @@ describe('EncryptionService', () => {
     });
 
     it('should throw on decryption failure', async () => {
+        // Set up logging service mock to verify err is logged
+        loggingService.error.mockImplementation(() => {});
+
+        // const errorSpy = jest.spyOn(loggingService, 'error');
+        
+        
+
         await expect(service.decrypt('invalid-data'))
-            .rejects.toThrow('Decryption failed');
-        expect(loggingService.error).toHaveBeenCalled();
+            .rejects.toThrowError(TypeError);
+
+        // Verify that err was logged
+        expect(loggingService.error).toHaveBeenCalledWith(
+            'Decryption failed', 
+            expect.objectContaining({
+                message : 'Invalid initialization vector',
+            })
+
+
+        /* expect(loggingService.error).toHaveBeenCalledWith(
+            'Decryption failed', 
+            expect.any(TypeError) */
+        );
     });
 });

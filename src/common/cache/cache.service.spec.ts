@@ -4,7 +4,18 @@ import { LoggingService } from '../logging/logging.service';
 import { createMock } from '@golevelup/ts-jest';
 import { Redis } from 'ioredis';
 
-jest.mock('ioredis');
+// Mock Redis constructor and instance methods
+const mockRedisInstance = {
+    get: jest.fn(),
+    set: jest.fn(),
+    del: jest.fn(),
+};
+
+jest.mock('ioredis', () => {
+    return {
+        Redis: jest.fn().mockImplementation(() => mockRedisInstance)
+    };
+});
 
 describe('CacheService', () => {
     let service: CacheService;
@@ -12,6 +23,9 @@ describe('CacheService', () => {
     let redisMock: jest.Mocked<Redis>;
 
     beforeEach(async () => {
+        // Clear mock calls before each test
+        jest.clearAllMocks();
+
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 {
@@ -34,7 +48,7 @@ describe('CacheService', () => {
 
         service = module.get<CacheService>(CacheService);
         loggingService = module.get(LoggingService);
-        redisMock = (Redis as jest.MockedClass<typeof Redis>).mock.instances[0] as jest.Mocked<Redis>;
+        redisMock = mockRedisInstance as unknown as jest.Mocked<Redis>;
     });
 
     it('should get cached value', async () => {
