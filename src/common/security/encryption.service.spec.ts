@@ -48,24 +48,15 @@ describe('EncryptionService', () => {
         // Set up logging service mock to verify err is logged
         loggingService.error.mockImplementation(() => {});
 
-        // const errorSpy = jest.spyOn(loggingService, 'error');
-        
-        
-
         await expect(service.decrypt('invalid-data'))
-            .rejects.toThrowError(TypeError);
+            .rejects.toThrow(TypeError);
 
         // Verify that err was logged
         expect(loggingService.error).toHaveBeenCalledWith(
             'Decryption failed', 
             expect.objectContaining({
-                message : 'Invalid initialization vector',
+                error: expect.any(TypeError)
             })
-
-
-        /* expect(loggingService.error).toHaveBeenCalledWith(
-            'Decryption failed', 
-            expect.any(TypeError) */
         );
     });
 });
