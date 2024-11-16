@@ -85,7 +85,7 @@ export class EncryptionService {
 
             return decrypted.toString('utf8');
         } catch (error) {
-            this.loggingService.error('Decryption failed', { error });
+            this.loggingService.error('Decryption failed', { error } ); // { error } is shorthand for { error: error }
             throw new Error('Decryption failed');
         }
     }

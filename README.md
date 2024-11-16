@@ -531,4 +531,8 @@ Nov 14th 2024 19:09
 
 Nov 15th 2024 12:58
 <!-- Todo: test file debugging -->
+<!-- * Solved the testing of `cache.service.spec.ts`. * -->
 
+
+Nov 16th 2024 21:50
+<!-- * Solved the testing of `encryption.service.spec.ts`. * -->

@@ -49,13 +49,15 @@ describe('EncryptionService', () => {
         loggingService.error.mockImplementation(() => {});
 
         await expect(service.decrypt('invalid-data'))
-            .rejects.toThrow(TypeError);
+            .rejects.toThrow('Decryption failed');
 
         // Verify that err was logged
         expect(loggingService.error).toHaveBeenCalledWith(
             'Decryption failed', 
             expect.objectContaining({
-                error: expect.any(TypeError)
+                error: expect.objectContaining({
+                    message: 'Invalid initialization vector'
+                })
             })
         );
     });
