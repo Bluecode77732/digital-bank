@@ -536,3 +536,7 @@ Nov 15th 2024 12:58
 
 Nov 16th 2024 21:50
 <!-- * Solved the testing of `encryption.service.spec.ts`. * -->
+
+
+Nov 18th 2024 12:55
+<!-- TODO: Move on to Implement the Database Module -->
