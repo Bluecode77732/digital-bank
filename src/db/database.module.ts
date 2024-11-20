@@ -11,25 +11,25 @@ import { addTransactionalDataSource } from 'typeorm-transactional';
       imports: [ConfigModule],
       // name : '',   //When to use name, need to set the data source name outside useFactory.
         useFactory: async (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get('DB_HOST'),
-        port: configService.get('DB_PORT'),
-        username: configService.get('DB_USERNAME'),
-        password: configService.get('DB_PASSWORD'),
-        database: configService.get('DB_NAME'),
-        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        synchronize: configService.get('NODE_ENV') !== 'production',
-        logging: configService.get('NODE_ENV') !== 'production',
-        ssl: configService.get('NODE_ENV') === 'production' ? {
-          rejectUnauthorized: false,
-        } : false,
-        autoLoadEntities: true,
-        migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
-        migrationsRun: true,
-        keepConnectionAlive: true,
-        poolSize: 20,
-        connectionTimeoutMillis: 10000,
-        maxQueryExecutionTime: 5000,
+        type: 'postgres', //datatype
+        host: configService.get('DB_HOST'), //database host
+        port: configService.get('DB_PORT'), //database host port
+        username: configService.get('DB_USERNAME'), //database name
+        password: configService.get('DB_PASSWORD'), //db pw
+        database: configService.get('DB_NAME'), //db name to connect to 
+        entities: [__dirname + '/../**/*.entity{.ts,.js}'], //entities and repos where need to be loaded at
+        synchronize: configService.get('NODE_ENV') !== 'production',  //db scheme creation on every application launch
+        logging: configService.get('NODE_ENV') !== 'production',  //db logging option
+        ssl: configService.get('NODE_ENV') === 'production' ? { //getting ssl configuration object 
+          rejectUnauthorized: false,  //if true, server to be disconnected unauthorized list of supplied CAs
+        } : false,  //why is this false?
+        autoLoadEntities: true, //automatical entity load
+        migrations: [__dirname + '/migrations/**/*{.ts,.js}'],  //migration pathway
+        migrationsRun: true,  //option whether migration to be automatic run
+        keepConnectionAlive: true,  //application connect in background
+        poolSize: 20, //client pooling scale
+        connectionTimeoutMillis: 10000, //connection timeout
+        maxQueryExecutionTime: 5000,  //logger warning of maximun query execution
       }),
       inject: [ConfigService],
       // Add support for transactions
