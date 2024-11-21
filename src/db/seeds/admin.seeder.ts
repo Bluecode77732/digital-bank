@@ -4,9 +4,9 @@ import { User } from "@/user/user.entity";
 import { Account } from "@/accnt/account.entity";
 
 export default class AdminSeeder implements Seeder {
-    public async run(
+    public async run(   //run is *defined* method in the `Seeder` interface
         dataSource : DataSource,
-        factoryManager : SeederFactoryManager,  //Define a factory for each entity for which data should be automatically generated. To create entities with random data, create a factory for each desired entity. The definition of a factory is optional.
+        factoryManager : SeederFactoryManager,  //Defines a factory for each entity for which data should be automatically generated. To create entities with random data, create a factory for each desired entity. The definition of a factory is optional.
     ) : Promise<void> {
         const userRepo = dataSource.getRepository(User);
         const accntRepo = dataSource.getRepository(Account);
