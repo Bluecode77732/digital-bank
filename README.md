@@ -554,5 +554,9 @@ Nov 20th 2024 22:00
 <!-- TODO: Implementing the Database Seeder -->
 
 
-Nov 21th 2024 :00
+Nov 21st 2024 12:
+<!-- TODO: Implementing the Database Seeder -->
+
+
+Nov 22th 2024 :
 <!-- TODO: Implementing the Database Seeder -->

@@ -24,8 +24,8 @@ export default class AdminSeeder implements Seeder {
         // Create admin accnt
         await accntRepo.save({
             userId: adminUser.id,   //Getting `Id` data source from the `User` repository
-            accntNumber: '',
-            accntType: '',
+            accntNumber: '1',
+            accntType: 'admin',
             balance: 0, //`userId` gets err when `balance`
             currency: 'USD',
             isActive : true,
