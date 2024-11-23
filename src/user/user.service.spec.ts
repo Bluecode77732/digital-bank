@@ -47,6 +47,11 @@ describe('UserService', () => {
             username: 'test',
             email: 'test@test.com',
             password: 'password',
+            trscs: [],
+            firstName: '',
+            lastName: '',
+            role: '',
+            isActive: false,
             accounts: [{
                 id: '123',
                 accountNumber: '456',
@@ -59,26 +64,25 @@ describe('UserService', () => {
                     email: '@',
                     password: '789',
                     accounts: [],
-                    trscs: [], // User-level transactions in nested owner
-                },
-                trscs: [{   // Now this is an Account type
+                    trscs: [],
+                    firstName: '',
+                    lastName: '',
+                    role: '',
+                    isActive: false
+                }, 
+                trscs: [{
                     id: '789',
                     username: '101112',
                     email: '@',
                     password: '789',
                     accounts: [],
-                    /* owner: {
-                        id: '123',
-                        username: '456',
-                        email: '@',
-                        password: '789',
-                        accounts: [],
-                        trscs: [],
-                    }, */
-                    trscs: [] // This account's transactions
+                    trscs: [], // This account's transactions
+                    firstName: '',
+                    lastName: '',
+                    role: '',
+                    isActive: false
                 }],
             }],
-            trscs: [],
         }];
 
         jest.spyOn(repo, 'find').mockResolvedValue(users);

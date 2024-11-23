@@ -442,7 +442,7 @@ Claude :
 14. Microservices // #12 in the first list
 15. Swagger Module // #16 in the first list
 
-Note: The Throttle Module from the first list is not present in the second list.
+Note: The Throttle Module in the 15th ChatGPT's list is not present in the Claude's list.
 
 
 Oct 22th 2024 22:58
@@ -558,5 +558,11 @@ Nov 21st 2024 12:
 <!-- TODO: Implementing the Database Seeder -->
 
 
-Nov 22th 2024 :
+Nov 22th 2024 12:
 <!-- TODO: Implementing the Database Factory -->
+
+
+Nov 23th 2024 10:49
+<!-- ? When to write or when else, Be Curious and Keep Question on **What** I am planning, **Why** it matters, and *How* to implement. ? -->
+<!-- TODO: Understanding the Database Factory -->
+<!-- TODO: To Understand the Common files -->

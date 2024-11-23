@@ -94,9 +94,13 @@ describe('AccountService', () => {
             // Add other required User properties
             username: 'testuser',
             email: 'test@example.com',
-            password : 'pw123',
+            password: 'pw123',
             accounts: [],
             trscs: [],
+            firstName: '',
+            lastName: '',
+            role: '',
+            isActive: false
         };
 
         const createdAccount: Account = {
