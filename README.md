@@ -564,5 +564,6 @@ Nov 22th 2024 12:
 
 Nov 23th 2024 10:49
 <!-- ? When to write or when else, Be Curious and Keep Question on **What** I am planning, **Why** it matters, and *How* to implement. ? -->
+<!-- A confess : I've been implementing the codes in this project and other project was created by AIs as I didn't really feel like to spend my efforts on them, but I think it's time to focus and study. -->
 <!-- TODO: Understanding the Database Factory -->
 <!-- TODO: To Understand the Common files -->
