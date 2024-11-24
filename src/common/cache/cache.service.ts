@@ -9,13 +9,13 @@ export class CacheService {
 
     constructor(
         private readonly loggingService: LoggingService,
-        private readonly config: {
+        private readonly config: {  
             host: string;
             port: number;
             password: string;
         },
     ) {
-        this.redis = new Redis({
+        this.redis = new Redis({    //To use Redis, are properties need to be set?
             host: config.host,
             port: config.port,
             password: config.password,
