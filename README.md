@@ -569,3 +569,7 @@ Nov 23th 2024 10:49
 <!-- as I didn't really feel like to spend my efforts on them, but I think it's time to focus and study. -->
 <!-- TODO: Understanding the Database Factory -->
 <!-- TODO: To Understand the Common files -->
+
+
+Nov 26th 2024 12:58
+<!-- TODO: Implementing the Database Seeder Factory -->

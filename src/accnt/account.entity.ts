@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 import { User } from '../user/user.entity';
+import { IsBoolean, IsCurrency } from 'class-validator';
 
 @Entity('accounts')
 export class Account {
@@ -31,4 +32,10 @@ export class Account {
     // Remove the duplicate user property
     // @ManyToOne(() => User, user => user.accounts)
     // user: User;
+
+    @IsCurrency()
+    currency!: string;
+
+    @IsBoolean()
+    isActive : boolean
 }
