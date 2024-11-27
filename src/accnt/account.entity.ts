@@ -11,7 +11,7 @@ export class Account {
     accountNumber!: string;
 
     @Column({ type: 'decimal', precision: 12, scale: 2 })
-    balance!: number;
+    balance!: number | string;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
@@ -23,7 +23,10 @@ export class Account {
         @ManyToOne(() => User, user => user.accounts)
         user: User;  // Reference the user entity */
 
-    @ManyToOne(() => User, user => user.accounts, { eager: true })
+    @ManyToOne(() => User, user => user.accounts, { 
+        eager: false,
+        nullable: false,    // means the related user won't be automatically loaded with each account query
+    })
     owner!: User;
     
     @OneToMany(() => User, user => user.accounts, { eager: true })

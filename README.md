@@ -577,3 +577,12 @@ Nov 26th 2024 12:58
 
 Nov 27th 2024 12:22
 <!-- TODO: Debugging the Database Seeder Factory -->
+
+Nov 27th 2024 18:14
+<!-- * `await` is removed as that's synchronous parameter * -->
+
+<!-- ? What the hell is the Promise and why is it everywhere? -->
+
+<!-- /* await accountFactory.create {   */ //map err caused. -->
+
+<!-- ? What is this code? `map(async (account) =>` -->

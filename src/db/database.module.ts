@@ -37,7 +37,7 @@ import { addTransactionalDataSource } from 'typeorm-transactional';
         if (!options) {
           throw new Error('Invalid options passed');
         }
-        return addTransactionalDataSource(new DataSource(options));
+        return addTransactionalDataSource(new DataSource(options)); //Why it does return the `addTransactionalDataSource`?
       },
     }),
   ],
