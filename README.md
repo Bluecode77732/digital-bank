@@ -586,3 +586,7 @@ Nov 27th 2024 18:14
 <!-- /* await accountFactory.create {   */ //map err caused. -->
 
 <!-- ? What is this code? `map(async (account) =>` -->
+
+<!-- * Finished implementing codes * -->
+
+<!-- TODO: To created test files and write test codes -->
