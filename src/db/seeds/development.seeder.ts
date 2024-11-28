@@ -25,7 +25,7 @@ export default class DevelopmentSeeder implements Seeder {
                 return Array.from({ length: numberOfAccounts }, () => 
                     accountFactory.save({ 
                         // Keeping relationship with Account columns.
-                        id : user.id,   
+                        id : user.id,
                         accountNumber : faker.finance.accountNumber(),
                         accountType : faker.helpers.arrayElement(['savings', 'checking', 'investment']),
                         balance : faker.finance.amount(),
