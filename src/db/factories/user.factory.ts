@@ -12,4 +12,3 @@ export default setSeederFactory(User, faker => {
     user.isActive = true;
     return user;
 });
-    
