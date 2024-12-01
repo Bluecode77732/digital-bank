@@ -1,10 +1,9 @@
-import { faker } from "@faker-js/faker/.";
 import { User } from "@/user/user.entity";
-import { setSeederFactory } from "typeorm-extension";
+import userFactory from "./user.factory";
+import { faker } from "@faker-js/faker/.";
 
 describe('User Factory', () => {
-    const createUserFactory = () => {
-        return setSeederFactory(User, (faker) => {
+    it('should create a valid Account instance', () => {
             const user = new User();
             user.email = faker.internet.email();
             user.password = 'pw';
@@ -14,11 +13,9 @@ describe('User Factory', () => {
             user.isActive = true;
             return user;
         });
-    };
 
     it('should create a valid User instance', () => {
-        const userFactory = createUserFactory();
-        const user = userFactory(faker);
+        const user = userFactory();
 
         expect(user).toBeInstanceOf(User);
         expect(user.email).toBeTruthy();
@@ -30,8 +27,7 @@ describe('User Factory', () => {
     });
 
     it('should generate unique users', () => {
-        const userFactory = createUserFactory();
-        const users = Array.from({ length: 5 }, () => userFactory(faker));
+        const users = Array.from({ length: 5 }, () => userFactory());
 
         expect(users.length).toBe(5);
         const uniqueEmails = new Set(users.map(u => u.email));

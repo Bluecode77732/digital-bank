@@ -1,8 +1,9 @@
 import { User } from "@/user/user.entity";
-import { setSeederFactory } from "typeorm-extension";
+import { faker } from "@faker-js/faker/.";
+// import { setSeederFactory } from "typeorm-extension"; removing setSeederFactory.
 
 // setting up the seeder factory
-export default setSeederFactory(User, faker => {
+export default function userFactory() : User {
     const user = new User();
     user.email = faker.internet.email();
     user.password = 'pw';
@@ -11,4 +12,4 @@ export default setSeederFactory(User, faker => {
     user.role = 'user';
     user.isActive = true;
     return user;
-});
+};

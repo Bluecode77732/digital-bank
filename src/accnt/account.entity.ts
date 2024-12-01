@@ -2,6 +2,9 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'ty
 import { User } from '../user/user.entity';
 import { IsBoolean, IsCurrency } from 'class-validator';
 
+type type1 = number | string;
+type type2 = number | any;
+
 @Entity('accounts')
 export class Account {
     @PrimaryGeneratedColumn('uuid')
@@ -11,7 +14,7 @@ export class Account {
     accountNumber!: string;
 
     @Column({ type: 'decimal', precision: 12, scale: 2 })
-    balance!: number | string;
+    balance: type1 | type2;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;

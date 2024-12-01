@@ -111,6 +111,8 @@ describe('AccountService', () => {
             accountType: createAccountDto.accountType,
             createdAt: new Date(),
             trscs: [],
+            currency: '',
+            isActive: false
         };
 
         jest.spyOn(repo, 'create').mockReturnValue(createdAccount);
@@ -124,7 +126,7 @@ describe('AccountService', () => {
     
     it('should return all accounts', async () => {
         const mockAccounts: Account[] = [
-            { 
+            {
                 id: '1',
                 accountNumber: '1',
                 balance: 100,
@@ -132,8 +134,10 @@ describe('AccountService', () => {
                 accountType: 'savings',
                 createdAt: new Date(),
                 trscs: [],
+                currency: '',
+                isActive: false
             },
-            { 
+            {
                 id: '2',
                 accountNumber: '2',
                 balance: 200,
@@ -141,6 +145,8 @@ describe('AccountService', () => {
                 accountType: 'checking',
                 createdAt: new Date(),
                 trscs: [],
+                currency: '',
+                isActive: false
             },
         ];
         
@@ -159,8 +165,10 @@ describe('AccountService', () => {
             balance: 100,
             owner: new User,
             accountType: 'savings',
-            createdAt : new Date(),
+            createdAt: new Date(),
             trscs: [],
+            currency: '',
+            isActive: false
         }
 
         jest.spyOn(repo, 'findOneBy')

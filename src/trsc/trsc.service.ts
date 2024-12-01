@@ -51,9 +51,11 @@ export class TrscService {
                 }
             }
 
-            if (['withdrawal', 'transfer'].includes(dto.trscType) && from.balance < dto.amount) {
+            if (['withdrawal', 'transfer'].includes(dto.trscType)) {    // if (['withdrawal', 'transfer'].includes(dto.trscType) && from.balance < dto.amount)
                 throw new BadRequestException('Insufficient funds');
-            }
+            } /* else if (
+                from.balance > dto.amount
+            ) */
 
             // Update balances based on transaction type
             this.updateBalances(from, to, dto.trscType, dto.amount);
@@ -64,7 +66,7 @@ export class TrscService {
                 toAccount: to,
                 amount: dto.amount,
                 trscType: dto.trscType,
-                createdAt: new Date()  // Changed from timestamp to createdAt
+                createdAt: new Date(Date.now())  // Changed from timestamp to createdAt
             });
 
             // Save all changes

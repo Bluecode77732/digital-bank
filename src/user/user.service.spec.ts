@@ -69,7 +69,7 @@ describe('UserService', () => {
                     lastName: '',
                     role: '',
                     isActive: false
-                }, 
+                },
                 trscs: [{
                     id: '789',
                     username: '101112',
@@ -82,6 +82,8 @@ describe('UserService', () => {
                     role: '',
                     isActive: false
                 }],
+                currency: '',
+                isActive: false
             }],
         }];
 
