@@ -51,7 +51,7 @@ export class LoggingService {
                 return JSON.stringify({
                     level,
                     message,
-                    timestamp: metadata.timestamp,
+                    timestamp: metadata,
                     service: this.config.serviceName,
                     environment: this.config.environment,
                     ...rest,

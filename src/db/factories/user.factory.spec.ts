@@ -11,7 +11,7 @@ describe('User Factory', () => {
             user.lastName = faker.person.lastName();
             user.role = 'user';
             user.isActive = true;
-            return user;
+            /* return user; */
         });
 
     it('should create a valid User instance', () => {
