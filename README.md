@@ -426,21 +426,21 @@ ChatGPT :
 
 Claude : 
 
-1. Common Module // #13 in the first list
-2. Database Module // #14 in the first list
-3. Users Module // #2 in the first list
-4. Authentication Module // #3 in the first list
-5. Accounts Module // #1 in the first list
-6. Transactions Module // #4 in the first list
-7. History Module // #6 in the first list
-8. Compliance Module // #5 in the first list
-9. Notifications Module // #8 in the first list
-10. Integrations Module // #11 in the first list
-11. Analytics Module // #7 in the first list
-12. Dashboard Module // #10 in the first list
-13. Feedback Module // #9 in the first list
-14. Microservices // #12 in the first list
-15. Swagger Module // #16 in the first list
+1. Common Module // #13 in the ChatGPT list
+2. Database Module // #14 in the ChatGPT list
+3. Users Module // #2 in the ChatGPT list
+4. Authentication Module // #3 in the ChatGPT list
+5. Accounts Module // #1 in the ChatGPT list
+6. Transactions Module // #4 in the ChatGPT list
+7. History Module // #6 in the ChatGPT list
+8. Compliance Module // #5 in the ChatGPT list
+9. Notifications Module // #8 in the ChatGPT list
+10. Integrations Module // #11 in the ChatGPT list
+11. Analytics Module // #7 in the ChatGPT list
+12. Dashboard Module // #10 in the ChatGPT list
+13. Feedback Module // #9 in the ChatGPT list
+14. Microservices // #12 in the ChatGPT list
+15. Swagger Module // #16 in the ChatGPT list
 
 Note: The Throttle Module in the 15th ChatGPT's list is not present in the Claude's list.
 
