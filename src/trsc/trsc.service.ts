@@ -3,20 +3,20 @@ import { Injectable, NotFoundException, BadRequestException } from "@nestjs/comm
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, DataSource } from "typeorm";
 import { CreateTrscDto } from "./dto/create-trsc.dto";
-import { Account } from "@/accnt/account.entity";
-import { Trsc } from "./trsc.entity";
+import { AccountEntity } from "@/accnt/account.entity";
+import { TrscEntity } from "./trsc.entity";
 
 @Injectable()
 export class TrscService {
     constructor(
-        @InjectRepository(Trsc)
-        private transactions: Repository<Trsc>,
-        @InjectRepository(Account)
-        private accounts: Repository<Account>,
+        @InjectRepository(TrscEntity)
+        private transactions: Repository<TrscEntity>,
+        @InjectRepository(AccountEntity)
+        private accounts: Repository<AccountEntity>,
         private db: DataSource,
     ) { }
 
-    async create(dto: CreateTrscDto): Promise<Trsc> {
+    async create(dto: CreateTrscDto): Promise<TrscEntity> {
         const runner = this.db.createQueryRunner();
         await runner.connect();
         await runner.startTransaction();
@@ -87,7 +87,7 @@ export class TrscService {
         }
     }
 
-    private updateBalances(from: Account, to: Account | null, type: CreateTrscDto['trscType'], amount : number): void {
+    private updateBalances(from: AccountEntity, to: AccountEntity | null, type: CreateTrscDto['trscType'], amount : number): void {
         switch (type) {
             case 'withdrawal':
                 from.balance -= amount;
@@ -103,7 +103,7 @@ export class TrscService {
         }
     }
 
-    async findByAccnt(accountId: string): Promise<Trsc[]> {
+    async findByAccnt(accountId: string): Promise<TrscEntity[]> {
         const transactions = await this.transactions.find({
             where: [
                 { fromAccount: { id: accountId } },
@@ -121,7 +121,7 @@ export class TrscService {
         return transactions;
     }
 
-    async findAll(limit = 100): Promise<Trsc[]> {
+    async findAll(limit = 100): Promise<TrscEntity[]> {
         return this.transactions.find({
             relations: ['fromAccount', 'toAccount'],
             order: { createdAt: 'DESC' },  // Changed from timestamp to createdAt

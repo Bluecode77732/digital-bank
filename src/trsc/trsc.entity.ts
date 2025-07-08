@@ -1,8 +1,8 @@
-import { Account } from "@/accnt/account.entity";
+import { AccountEntity } from "@/accnt/account.entity";
 import { Column, CreateDateColumn, Decimal128, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('trscs')
-export class Trsc {
+export class TrscEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -18,11 +18,11 @@ export class Trsc {
     /* @ManyToOne(() => Account, account => account.trscs, {onDelete : 'CASCADE'}) //WTH IS CASCADE? NV SEEN LIKE THIS ONE LOL
     fromAccount: Account; */
 
-    @ManyToOne(() => Account, account => account.trscs)
-    fromAccount: Account;
+    @ManyToOne(() => AccountEntity, account => account.trscs)
+    fromAccount: AccountEntity;
 
-    @ManyToOne(() => Account, { nullable: true })
-    toAccount: Account;
+    @ManyToOne(() => AccountEntity, { nullable: true })
+    toAccount: AccountEntity;
 
 
     /* @ManyToOne(() => Account, (account) => account.sentTransactions, { eager: true })  // Relation to the fromAccount

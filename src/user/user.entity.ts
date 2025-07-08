@@ -1,9 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Account } from '../accnt/account.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, AcceptedFields } from 'typeorm';
+import { AccountEntity } from '../accnt/account.entity';
 import { IsBoolean } from 'class-validator';
 
 @Entity('uers')
-export class User {
+export class UserEntity {
     @PrimaryGeneratedColumn()
     id!: string;
     
@@ -30,9 +30,9 @@ export class User {
     isActive!: boolean
 
     // One user can have multiple accounts
-    @OneToMany(() => Account, account => account.owner)
-    accounts!: Account[];  // Fix the missing accounts property
+    @OneToMany(() => AccountEntity, account => account.owner)
+    accounts!: AccountEntity[];  // Fix the missing accounts property
     
-    @OneToMany(() => Account, account => account.owner)
-    trscs: Account[];  
+    @OneToMany(() => AccountEntity, account => account.owner)
+    trscs: AccountEntity[];  
 }

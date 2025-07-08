@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Transaction } from 'typeorm';
 import { TrscService } from './trsc.service';
 import { TrscController } from './trsc.controller';
-import { Trsc } from './trsc.entity';
+import { TrscEntity } from './trsc.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Transaction]), AccountModule],

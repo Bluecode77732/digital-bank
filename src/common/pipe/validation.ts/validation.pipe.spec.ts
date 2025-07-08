@@ -1,10 +1,9 @@
 // pipes/validation.pipe.spec.ts
 import { Test, TestingModule } from '@nestjs/testing';
-import { ValidationPipe } from './validation.pipe';
-import { LoggingService } from '../logging/logging.service';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import { IsString } from 'class-validator';
 import { createMock } from '@golevelup/ts-jest';
+import { LoggingService } from '@/common/logging/logging.service';
 
 class TestDto {
   @IsString()

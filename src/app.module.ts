@@ -6,42 +6,61 @@ import { UserModule } from './user/..module';
 // import authmodule
 import { isPort } from 'class-validator';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 import Joi from 'joi';
 import userFactory from './db/factories/user.factory';
-
-const db_type = 'DB_TYPE';
-const db_host = 'DB_HOST';
-const db_port = 'DB_PORT';
-const db_username = 'DB_USERNAME';
-const db_pw = 'DB_PASSWORD';
-const db_db = 'DB_DATABASE';
+import { CacheModule } from '@nestjs/cache-manager';
+import { UserEntity } from './user/user.entity';
+import { AccountEntity } from './accnt/account.entity';
+import { TrscEntity } from './trsc/trsc.entity';
+import { SwaggerModule } from '@nestjs/swagger';
+import { TrscModule } from './trsc/trsc.module';
+import { envVariableKeys } from './common/constant/env.constant';
 
 @Module({
+  //* in-memory caching with default settings, allowing you to start caching data immediately.
+  // imports: [CacheModule.register()],
+
   imports: [
+    CacheModule.register(),
+    AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
         ENV: Joi.string().valid('dev', 'prod').required(),
-
+        DB_TYPE: Joi.string().valid('postgres').required(),
+        DB_HOST: Joi.string().required(),
+        DB_PORT: Joi.number().required(),
+        DB_USERNAME: Joi.string().required(),
+        DB_PASSWORD: Joi.string().required(),
+        DB_DATABASE: Joi.string().required(),
       }),
-    }),
+    }), //Globally able to use in external modules.
     TypeOrmModule.forRootAsync({
-      useFactory: (configService : ConfigService) => ({
-        type: configService.get<string>(db_type) as 'postgres',
-        host: configService.get<string>(db_host),
-        port: configService.get<string>(db_port),
-        username: configService.get<string>(db_username),
-        password: configService.get<string>(db_pw),
-        database: configService.get<string>(db_db),
+      useFactory: (configService: ConfigService) => ({
+        type: configService.get<string>(envVariableKeys.db_type) as 'postgres',
+        host: configService.get<string>(envVariableKeys.db_host),
+        port: configService.get<number>(envVariableKeys.db_port),
+        username: configService.get<string>(envVariableKeys.db_username),
+        password: configService.get<string>(envVariableKeys.db_pw),
+        database: configService.get<string>(envVariableKeys.db_db),
         entities: [
-            //Bank entity should be filled in for creating a table in postgres.
-        ]
+          AccountEntity,
+          UserEntity,
+          TrscEntity,
+          //Bank entity should be filled in for creating a table in postgres.
+        ],
+        synchronize: true,
         // autoLoadEntities: ConfigService.get<string>(),
         // synchronize: ConfigService.get<string>(),
       }),
+      inject: [ConfigService],
     }),
     AccountModule,
+    AuthModule,
     UserModule,
+    SwaggerModule,
+    TrscModule,
     // AuthModule,
   ],
 })

@@ -11,7 +11,7 @@ import * as Joi from 'joi'
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
-        
+        //
       }),
     }), 
     TypeOrmModule.forRootAsync({

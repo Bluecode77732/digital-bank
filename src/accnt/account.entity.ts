@@ -1,12 +1,12 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
-import { User } from '../user/user.entity';
+import { UserEntity } from '../user/user.entity';
 import { IsBoolean, IsCurrency } from 'class-validator';
 
 type type1 = number | string;
 type type2 = number | any;
 
 @Entity('accounts')
-export class Account {
+export class AccountEntity {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
 
@@ -26,14 +26,14 @@ export class Account {
         @ManyToOne(() => User, user => user.accounts)
         user: User;  // Reference the user entity */
 
-    @ManyToOne(() => User, user => user.accounts, { 
+    @ManyToOne(() => UserEntity, user => user.accounts, { 
         eager: false,
         nullable: false,    // means the related user won't be automatically loaded with each account query
     })
-    owner!: User;
+    owner!: UserEntity;
     
-    @OneToMany(() => User, user => user.accounts, { eager: true })
-    trscs!: User[];
+    @OneToMany(() => UserEntity, user => user.accounts, { eager: true })
+    trscs!: UserEntity[];
 
     // Remove the duplicate user property
     // @ManyToOne(() => User, user => user.accounts)
