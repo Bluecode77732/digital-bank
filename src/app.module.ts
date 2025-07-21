@@ -18,10 +18,8 @@ import { TrscModule } from './trsc/trsc.module';
 import { envVariableKeys } from './common/constant/env.constant';
 
 @Module({
-  //* in-memory caching with default settings, allowing you to start caching data immediately.
-  // imports: [CacheModule.register()],
-
   imports: [
+    //* `CacheModule.register()` : in-memory caching with default settings, allowing you to start caching data immediately.
     CacheModule.register(),
     AuthModule,
     ConfigModule.forRoot({
