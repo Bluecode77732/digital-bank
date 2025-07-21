@@ -8,7 +8,9 @@ export class AccountController {
     constructor(private readonly accountService: AccountService) { }
 
     @Post()
-    create(@Body() createAccountDto: CreateAccountDto) {
+    create(
+        @Body() createAccountDto: CreateAccountDto
+    ) {
         return this.accountService.create(createAccountDto);
     }
 
@@ -18,17 +20,21 @@ export class AccountController {
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
+    findOne( @Param('id') id: string ) {
         return this.accountService.findOne(id);
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateAccountDto: UpdateAccountDto) {
+    update(
+        @Param('id') id: string, 
+        @Body() updateAccountDto: UpdateAccountDto
+    ) {
         return this.accountService.update(id, updateAccountDto);
     }
 
     @Delete(':id')
-    remove(@Param('id') id: string) {
+    remove( @Param('id') id: string ) {
         return this.accountService.remove(id);
     }
+    
 }

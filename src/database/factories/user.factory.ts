@@ -1,4 +1,4 @@
-import { User } from "@/user/user.entity";
+import { User } from "@/user/entity/user.entity";
 import { faker } from "@faker-js/faker/.";
 // import { setSeederFactory } from "typeorm-extension"; removing setSeederFactory.
 

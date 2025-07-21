@@ -1,20 +1,26 @@
-import { IsString, IsEmail, MinLength, IsNotEmpty } from 'class-validator';
+import { Role } from '@/common/type/common.type';
+import { IsString, IsEmail, MinLength, IsNotEmpty, IsEnum, IsNumber } from 'class-validator';
 
 export class CreateUserDto {
+
+    @IsNotEmpty()
     @IsString()
     @IsNotEmpty()
-    id!: string;
+    username?: string;
     
-    @IsString()
     @IsNotEmpty()
-    username!: string;
-    
     @IsEmail()
     @IsNotEmpty()
-    email!: string;
+    email?: string;
     
     @IsNotEmpty()
     @IsString()
     @MinLength(6)
-    password!: string;
+    password?: string;
+    
+    @IsNotEmpty()
+    @IsEnum(Role)
+    @IsNumber()
+    role: number;
+    
 }

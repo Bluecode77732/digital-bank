@@ -1,4 +1,4 @@
-import { Account } from "@/accnt/account.entity";
+import { Account } from "@/accnt/entity/account.entity";
 import accountFactory from "./account.factory";
 
 describe('Account Factory', () => {

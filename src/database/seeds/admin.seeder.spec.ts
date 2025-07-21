@@ -1,8 +1,8 @@
 import { DataSource, Repository } from "typeorm";
 import { SeederFactoryManager } from "typeorm-extension";
 import AdminSeeder from "./admin.seeder";
-import { User } from "@/user/user.entity";
-import { Account } from "@/accnt/account.entity";
+import { User } from "@/user/entity/user.entity";
+import { Account } from "@/accnt/entity/account.entity";
 
 describe('AdminSeeder', () => {
     let dataSource: jest.Mocked<DataSource>;

@@ -3,7 +3,7 @@ import { TrscService } from './trsc.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import { Trsc } from './trsc.entity';
-import { Account } from '@/accnt/account.entity';
+import { Account } from '@/accnt/entity/account.entity';
 
 describe('TrscService', () => {
     let service: TrscService;

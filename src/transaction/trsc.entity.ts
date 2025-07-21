@@ -1,4 +1,4 @@
-import { Account } from "@/accnt/account.entity";
+import { Account } from "@/accnt/entity/account.entity";
 import { Column, CreateDateColumn, Decimal128, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('trscs')

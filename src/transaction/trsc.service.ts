@@ -3,7 +3,7 @@ import { Injectable, NotFoundException, BadRequestException } from "@nestjs/comm
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, DataSource } from "typeorm";
 import { CreateTrscDto } from "./dto/create-trsc.dto";
-import { Account } from "@/accnt/account.entity";
+import { Account } from "@/accnt/entity/account.entity";
 import { Trsc } from "./trsc.entity";
 
 @Injectable()

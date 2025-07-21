@@ -1,5 +1,5 @@
-import { Account } from "@/accnt/account.entity";
-import { User } from "@/user/user.entity";
+import { Account } from "@/accnt/entity/account.entity";
+import { UserEntity } from "@/user/entity/user.entity";
 import { faker } from "@faker-js/faker/.";
 import { DataSource } from "typeorm";
 import { Seeder, SeederFactoryManager } from "typeorm-extension";
@@ -10,7 +10,7 @@ export default class DevelopmentSeeder implements Seeder {
         factoryManager: SeederFactoryManager
     ) : Promise<void> {
         try {
-            const userFactory = factoryManager.get(User); //These methods are synchronous, so no need for await.
+            const userFactory = factoryManager.get(UserEntity); //These methods are synchronous, so no need for await.
             const accountFactory = factoryManager.get(Account);   //await has no effection indeed lol
             
             // Create 10 new users

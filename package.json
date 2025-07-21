@@ -39,6 +39,7 @@
     "dotenv": "^16.4.5",
     "install": "^0.13.0",
     "ioredis": "^5.4.1",
+    "joi": "^17.13.3",
     "nest-winston": "^1.9.7",
     "nodemailer": "^6.9.15",
     "npm": "^10.9.0",

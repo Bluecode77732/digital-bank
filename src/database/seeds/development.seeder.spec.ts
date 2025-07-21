@@ -2,8 +2,8 @@ import { DataSource } from "typeorm";
 import { SeederFactoryManager } from "typeorm-extension";
 import { faker } from "@faker-js/faker/.";
 import DevelopmentSeeder from "./development.seeder";
-import { User } from "@/user/user.entity";
-import { Account } from "@/accnt/account.entity";
+import { User } from "@/user/entity/user.entity";
+import { Account } from "@/accnt/entity/account.entity";
 
 describe('DevelopmentSeeder', () => {
     let dataSource: jest.Mocked<DataSource>;
